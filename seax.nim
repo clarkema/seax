@@ -36,7 +36,7 @@ var config: Config
 try:
   config = loadConfig(config_file)
 except IOError:
-  echo "Failed to read config file!"
+  echo "Failed to read config file: ", getCurrentExceptionMsg()
   quit(1)
 
 let saxon_jar = config.requireValue("saxon", "jar_path")
