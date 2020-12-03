@@ -58,7 +58,7 @@ proc transform(args: seq[string]) =
   let p = startProcess(
     "java",
     args=(@["-cp", saxon_jar, "net.sf.saxon.Transform", "-xsl:" & saxonArgs.xsltPath ] & saxonArgs.args),
-    options={poUsePath, poStdErrtoStdOut}
+    options={poUsePath, poParentStreams} # add poEchoCmd for debugging
   )
 
 #let p = startProcess(
@@ -68,8 +68,6 @@ proc transform(args: seq[string]) =
 #)
 
   discard p.waitForExit()
-
-  echo p.outputStream().readAll()
 
 proc main =
   let argv = commandLineParams()
